@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. KAMBALE MONDO - Accueil</title>
+    <meta name="description"
+        content="Dr. KAMBALE MONDO, Docteur en Mécanique et Directeur Général de ISTA/Goma. Excellence en ingénierie mécanique et leadership académique.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/main.css">
+
+    <!-- Prevent flash of wrong theme -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</head>
+
+<body class="bg-off-white dark:bg-dark-bg text-charcoal dark:text-gray-100 antialiased transition-colors duration-300"
+    x-data x-init="$store.theme.init()">
+
+    <!-- Header & Navigation -->
+    <header x-data="headerComponent"
+        class="sticky top-0 z-50 bg-white/95 dark:bg-dark-card/95 backdrop-blur-sm border-b border-gray-100 dark:border-dark-border transition-colors duration-300">
+        <nav class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a :href="basePath + 'index.html'" class="text-2xl font-bold tracking-tight">
+                    <span class="text-charcoal dark:text-white">KM</span><span class="text-accent-orange">.</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a :href="basePath + 'index.html'"
+                        :class="isActive('index.html') ? 'nav-link-active' : 'nav-link-inactive'"
+                        class="nav-link">Accueil</a>
+                    <a :href="basePath + 'pages/blog.html'"
+                        :class="isActive('blog.html') ? 'nav-link-active' : 'nav-link-inactive'"
+                        class="nav-link">Blog</a>
+                    <a :href="basePath + 'pages/about.html'"
+                        :class="isActive('about.html') ? 'nav-link-active' : 'nav-link-inactive'" class="nav-link">À
+                        Propos</a>
+                    <a :href="basePath + 'pages/contact.html'"
+                        :class="isActive('contact.html') ? 'nav-link-active' : 'nav-link-inactive'"
+                        class="nav-link">Contact</a>
+
+                    <!-- Theme Toggle Button -->
+                    <button @click="$store.theme.toggle()"
+                        class="flex items-center gap-2 px-4 py-2 rounded-sm text-steel dark:text-gray-400 hover:text-accent-orange dark:hover:text-accent-orange hover:bg-gray-100 dark:hover:bg-dark-border transition-colors border border-gray-200 dark:border-dark-border"
+                        aria-label="Toggle theme">
+                        <svg x-show="$store.theme.darkMode" x-cloak class="w-5 h-5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="5" stroke-width="2" />
+                            <path stroke-linecap="round" stroke-width="2"
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                        <svg x-show="!$store.theme.darkMode" class="w-5 h-5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                        <span class="text-sm font-medium" x-text="$store.theme.darkMode ? 'Clair' : 'Sombre'"></span>
+                    </button>
+                </div>
+
+                <!-- Mobile: Theme Toggle + Menu Button -->
+                <div class="flex items-center gap-2 md:hidden">
+                    <button @click="$store.theme.toggle()"
+                        class="flex items-center gap-1.5 px-3 py-1.5 text-charcoal dark:text-gray-300 hover:text-accent-orange transition-colors border border-gray-200 dark:border-dark-border rounded-sm"
+                        aria-label="Toggle theme">
+                        <svg x-show="$store.theme.darkMode" x-cloak class="w-4 h-4" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="5" stroke-width="2" />
+                            <path stroke-linecap="round" stroke-width="2"
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                        <svg x-show="!$store.theme.darkMode" class="w-4 h-4" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                        <span class="text-xs font-medium" x-text="$store.theme.darkMode ? 'Clair' : 'Sombre'"></span>
+                    </button>
+                    <button @click="toggleMobileMenu"
+                        class="p-2 text-charcoal dark:text-gray-300 hover:text-accent-orange transition-colors"
+                        aria-label="Toggle menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                class="md:hidden pb-6" @click.away="mobileMenuOpen = false">
+                <a :href="basePath + 'index.html'"
+                    :class="isActive('index.html') ? 'nav-link-active' : 'nav-link-inactive'"
+                    class="block py-3 nav-link border-b border-gray-100 dark:border-dark-border">Accueil</a>
+                <a :href="basePath + 'pages/blog.html'"
+                    :class="isActive('blog.html') ? 'nav-link-active' : 'nav-link-inactive'"
+                    class="block py-3 nav-link border-b border-gray-100 dark:border-dark-border">Blog</a>
+                <a :href="basePath + 'pages/about.html'"
+                    :class="isActive('about.html') ? 'nav-link-active' : 'nav-link-inactive'"
+                    class="block py-3 nav-link border-b border-gray-100 dark:border-dark-border">À Propos</a>
+                <a :href="basePath + 'pages/contact.html'"
+                    :class="isActive('contact.html') ? 'nav-link-active' : 'nav-link-inactive'"
+                    class="block py-3 nav-link border-b border-gray-100 dark:border-dark-border">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section x-data="heroComponent" class="relative py-24 lg:py-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center fade-in">
+                <!-- Content -->
+                <div class="space-y-8">
+                    <div class="space-y-4">
+                        <p class="text-accent-orange text-sm font-semibold tracking-widest uppercase">
+                            Excellence & Innovation
+                        </p>
+                        <h1 class="text-5xl lg:text-6xl font-bold leading-tight tracking-tight"
+                            x-text="profile.fullName"></h1>
+                        <p class="text-2xl text-steel dark:text-gray-400 font-light" x-text="profile.title"></p>
+                    </div>
+
+                    <div class="h-px bg-gradient-to-r from-accent-orange via-steel to-transparent w-24"></div>
+
+                    <div class="space-y-2">
+                        <p class="text-lg font-semibold" x-text="profile.role"></p>
+                        <p class="text-steel dark:text-gray-400" x-text="profile.institution"></p>
+                    </div>
+
+                    <p class="text-lg text-steel dark:text-gray-400 leading-relaxed max-w-xl" x-text="profile.tagline">
+                    </p>
+
+                    <div class="flex gap-4 pt-4">
+                        <a href="pages/contact.html" class="btn-primary hover-lift">
+                            Me Contacter
+                        </a>
+                        <a href="pages/about.html" class="btn-secondary">
+                            En savoir plus
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profile Image Placeholder -->
+                <div class="relative">
+                    <div
+                        class="aspect-square bg-gradient-to-br from-steel to-charcoal rounded-sm overflow-hidden hover-lift">
+                        <img :src="profile.photo" :alt="profile.fullName" class="w-full h-full object-cover opacity-90"
+                            onerror="this.style.display='none'">
+                        <!-- Fallback if no image -->
+                        <div class="absolute inset-0 flex items-center justify-center text-white">
+                            <svg class="w-48 h-48 opacity-30" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Decorative Element -->
+                    <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-accent-orange opacity-10 rounded-sm -z-10">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Badges Section -->
+    <section x-data="expertiseBadgesComponent" class="py-20 bg-white dark:bg-dark-card transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title">Domaines d'Expertise</h2>
+                <div class="section-divider mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <template x-for="badge in badges" :key="badge.title">
+                    <div
+                        class="p-8 border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg rounded-sm hover:border-accent-orange transition-all hover-lift group">
+                        <div class="mb-6 group-hover:scale-110 transition-transform" x-html="badge.icon"></div>
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-accent-orange transition-colors"
+                            x-text="badge.title"></h3>
+                        <p class="text-steel dark:text-gray-400 leading-relaxed" x-text="badge.description"></p>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Articles Section -->
+    <section x-data="articleFeedComponent" class="py-20 bg-off-white dark:bg-dark-bg transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-16">
+                <div>
+                    <h2 class="section-title">Publications Récentes</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <a href="pages/blog.html" class="text-accent-orange font-semibold hover:underline hidden md:block">
+                    Voir tous les articles →
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <template x-for="article in articles" :key="article.id">
+                    <article class="card hover-lift group">
+                        <!-- Article Image -->
+                        <div class="aspect-video bg-gradient-to-br from-steel to-charcoal overflow-hidden">
+                            <img :src="article.image" :alt="article.title"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                onerror="this.style.display='none'">
+                        </div>
+
+                        <!-- Article Content -->
+                        <div class="p-6 space-y-4">
+                            <div class="flex items-center gap-4 text-sm text-steel dark:text-gray-400">
+                                <span x-text="formatDate(article.date)"></span>
+                                <span>•</span>
+                                <span x-text="article.readTime"></span>
+                            </div>
+
+                            <h3 class="text-xl font-bold leading-tight group-hover:text-accent-orange transition-colors line-clamp-2"
+                                x-text="article.title"></h3>
+
+                            <p class="text-steel dark:text-gray-400 leading-relaxed line-clamp-3"
+                                x-text="article.excerpt"></p>
+
+                            <div class="flex flex-wrap gap-2">
+                                <template x-for="tag in article.tags.slice(0, 2)" :key="tag">
+                                    <span
+                                        class="text-xs px-3 py-1 bg-off-white dark:bg-dark-border text-steel dark:text-gray-400 rounded-full"
+                                        x-text="tag"></span>
+                                </template>
+                            </div>
+                        </div>
+                    </article>
+                </template>
+            </div>
+
+            <div class="text-center mt-12 md:hidden">
+                <a href="pages/blog.html" class="inline-block text-accent-orange font-semibold hover:underline">
+                    Voir tous les articles →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer x-data="footerComponent" class="bg-charcoal text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-12 mb-12">
+                <!-- About -->
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold">
+                        <span>KM</span><span class="text-accent-orange">.</span>
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed" x-text="profile.tagline"></p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-lg">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a :href="basePath + 'index.html'"
+                                class="text-gray-400 hover:text-accent-orange transition-colors">Accueil</a></li>
+                        <li><a :href="basePath + 'pages/blog.html'"
+                                class="text-gray-400 hover:text-accent-orange transition-colors">Blog</a></li>
+                        <li><a :href="basePath + 'pages/about.html'"
+                                class="text-gray-400 hover:text-accent-orange transition-colors">À Propos</a></li>
+                        <li><a :href="basePath + 'pages/contact.html'"
+                                class="text-gray-400 hover:text-accent-orange transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-lg">Contact</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li x-text="profile.institution"></li>
+                        <li x-text="profile.email"></li>
+                        <li x-text="profile.location"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-400 text-sm">
+                    © <span x-text="currentYear"></span> Dr. KAMBALE MONDO. Tous droits réservés.
+                </p>
+                <div class="flex gap-6">
+                    <template x-for="link in siteData.social" :key="link.platform">
+                        <a :href="link.url" :aria-label="link.platform"
+                            class="text-gray-400 hover:text-accent-orange transition-colors" x-html="link.icon">
+                        </a>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="./js/app.js"></script>
+</body>
+
+</html>

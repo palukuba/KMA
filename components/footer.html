@@ -1,0 +1,54 @@
+<!-- Footer Component - Dr. KAMBALE MONDO -->
+<!-- Usage: Include via x-data="footerLoader" -->
+
+<footer x-data="footerComponent" class="bg-charcoal text-white py-16">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-12 mb-12">
+            <!-- About -->
+            <div class="space-y-4">
+                <h3 class="text-2xl font-bold">
+                    <span>KM</span><span class="text-accent-orange">.</span>
+                </h3>
+                <p class="text-gray-400 leading-relaxed" x-text="profile.tagline"></p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="space-y-4">
+                <h4 class="font-semibold text-lg">Navigation</h4>
+                <ul class="space-y-2">
+                    <li><a :href="basePath + 'index.html'"
+                            class="text-gray-400 hover:text-accent-orange transition-colors">Accueil</a></li>
+                    <li><a :href="basePath + 'pages/blog.html'"
+                            class="text-gray-400 hover:text-accent-orange transition-colors">Blog</a></li>
+                    <li><a :href="basePath + 'pages/about.html'"
+                            class="text-gray-400 hover:text-accent-orange transition-colors">À Propos</a></li>
+                    <li><a :href="basePath + 'pages/contact.html'"
+                            class="text-gray-400 hover:text-accent-orange transition-colors">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="space-y-4">
+                <h4 class="font-semibold text-lg">Contact</h4>
+                <ul class="space-y-3 text-gray-400">
+                    <li x-text="profile.institution"></li>
+                    <li x-text="profile.email"></li>
+                    <li x-text="profile.location"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-400 text-sm">
+                © <span x-text="currentYear"></span> Dr. KAMBALE MONDO. Tous droits réservés.
+            </p>
+            <div class="flex gap-6">
+                <template x-for="link in siteData.social" :key="link.platform">
+                    <a :href="link.url" :aria-label="link.platform"
+                        class="text-gray-400 hover:text-accent-orange transition-colors" x-html="link.icon">
+                    </a>
+                </template>
+            </div>
+        </div>
+    </div>
+</footer>

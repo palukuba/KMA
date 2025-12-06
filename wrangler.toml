@@ -1,0 +1,16 @@
+# Configuration for Cloudflare Pages deployment
+# Build command: npm run build
+# Build output directory: dist
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Redirects for SPA-like behavior (optional)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
