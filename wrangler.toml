@@ -1,16 +1,7 @@
 # Configuration for Cloudflare Pages deployment
-# Build command: npm run build
-# Build output directory: dist
+name = "dr-kambale-mondo-site"
+compatibility_date = "2024-12-06"
+pages_build_output_dir = "dist"
 
 [build]
-  command = "npm run build"
-  publish = "dist"
-
-[build.environment]
-  NODE_VERSION = "18"
-
-# Redirects for SPA-like behavior (optional)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+command = "npm install && npm run build"
