@@ -7,6 +7,12 @@
     <title>Article - Dr. KAMBALE MONDO</title>
     <meta name="description" content="Article du Dr. KAMBALE MONDO">
 
+    <!-- Performance: DNS Prefetch & Preconnect -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <!-- CSS -->
     <link rel="stylesheet" href="../css/main.css">
 
@@ -142,7 +148,7 @@
 
             <!-- Featured Image -->
             <div class="aspect-video bg-gradient-to-br from-steel to-charcoal rounded-sm overflow-hidden mb-12">
-                <img :src="'../' + article.image" :alt="article.title" class="w-full h-full object-cover"
+                <img :src="'../' + article.image" :alt="article.title" loading="lazy" class="w-full h-full object-cover"
                     onerror="this.style.display='none'">
             </div>
 
@@ -166,8 +172,8 @@
                 <div class="flex items-center gap-6">
                     <div
                         class="w-20 h-20 bg-gradient-to-br from-steel to-charcoal rounded-full overflow-hidden flex-shrink-0">
-                        <img :src="'../' + profile.photo" :alt="profile.fullName" class="w-full h-full object-cover"
-                            onerror="this.style.display='none'">
+                        <img :src="'../' + profile.photo" :alt="profile.fullName" loading="lazy"
+                            class="w-full h-full object-cover" onerror="this.style.display='none'">
                     </div>
                     <div>
                         <h3 class="text-xl font-bold mb-1" x-text="profile.fullName"></h3>
@@ -185,7 +191,7 @@
                         <article class="card hover-lift group">
                             <a :href="'article.html?id=' + relatedArticle.id"
                                 class="block aspect-video bg-gradient-to-br from-steel to-charcoal overflow-hidden">
-                                <img :src="'../' + relatedArticle.image" :alt="relatedArticle.title"
+                                <img :src="'../' + relatedArticle.image" :alt="relatedArticle.title" loading="lazy"
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     onerror="this.style.display='none'">
                             </a>

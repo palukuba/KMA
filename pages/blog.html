@@ -8,6 +8,12 @@
     <meta name="description"
         content="Articles et publications du Dr. KAMBALE MONDO sur l'ingénierie mécanique, le leadership académique et l'innovation technologique.">
 
+    <!-- Performance: DNS Prefetch & Preconnect -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <!-- CSS -->
     <link rel="stylesheet" href="../css/main.css">
 
@@ -172,7 +178,7 @@
                         <!-- Article Image -->
                         <a :href="'article.html?id=' + article.id"
                             class="block aspect-video bg-gradient-to-br from-steel to-charcoal overflow-hidden">
-                            <img :src="'../' + article.image" :alt="article.title"
+                            <img :src="'../' + article.image" :alt="article.title" loading="lazy"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 onerror="this.style.display='none'">
                         </a>
